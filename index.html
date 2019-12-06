@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Internal stylesheet import -->
+
+  <!-- External Script -->
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src="http://code.highcharts.com/highcharts-more.js"></script>
+  <script src="http://code.highcharts.com/maps/modules/map.js"></script>
+  <script src="http://code.highcharts.com/maps/modules/data.js"></script>
+  <script src="http://code.highcharts.com/mapdata/custom/world.js"></script>
+</head>
+
+<style>
+  .mapContainer {
+    flex-direction: 'row';
+
+  }
+
+  .tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+  }
+
+  /* Style the buttons inside the tab */
+  .tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+  }
+
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color: #ddd;
+  }
+
+  #container {
+    height: 500px;
+    min-width: 310px;
+    max-width: 800px;
+    margin-left: 0;
+  }
+
+  #video {
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding-left: 30%;
+  }
+
+  #map {
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding-left: 20%;
+  }
+
+  #geo {
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+
+  #japan {
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+
+  #us {
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+
+  .text {
+    margin-top: 5%;
+  }
+
+  .title {
+    font-weight: bold;
+    font-size: xx-large;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    padding-left: 10%;
+  }
+
+  .title2 {
+    font-weight: bold;
+    font-size: xx-large;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    padding-left: 35%;
+  }
+
+  #myRange {
+    width: 60%;
+    margin-left: 5%;
+    margin-top: 2%;
+  }
+
+  .loading {
+    margin-top: 10em;
+    text-align: center;
+    color: gray;
+  }
+
+  .embed-container {
+    position: relative;
+    padding-bottom: 80%;
+    height: 0;
+    max-width: 100%;
+  }
+
+  .embed-container iframe,
+  .embed-container object,
+  .embed-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  small {
+    position: absolute;
+    z-index: 40;
+    bottom: 0;
+    margin-bottom: -15px;
+  }
+</style>
+
+<body style="background-color:#FDF3D8;">
+  <!-- Page Header Table -->
+
+  <div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'video')">1. Intro Video</button>
+    <button class="tablinks" onclick="openCity(event, 'map')">2. Median Age Choropleth Map</button>
+    <button class="tablinks" onclick="openCity(event, 'japan')">3. Specific Case: Japan </button>
+    <button class="tablinks" onclick="openCity(event, 'us')">4. Specific Case: United State</button>
+    <button class="tablinks" onclick="openCity(event, 'geo')">5. GeoMap of aging: US</button>
+    <button class="tablinks" onclick="openCity(event, 'geo')">6. Related to Loneliness</button>
+    <button class="tablinks" onclick="openCity(event, 'geo')">7. Our Solution</button>
+  </div>
+
+  <div id="video" class="tabcontent">
+    <div class="title">
+      Introductive Vido to Product
+    </div>
+    <div id="video_tr">
+      <iframe width="616" height="346" src="https://www.youtube.com/embed/VBCJU9MHZ2E" frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="text">
+      This is the video
+    </div>
+  </div>
+
+  <div id="map" class="tabcontent">
+    <div class="title">
+      Choropleth Map to Median Age Per Year
+    </div>
+
+    <div id="container">
+      <div class="loading">
+        <i class="icon-spinner icon-spin icon-large"></i>
+        Loading data from Google Spreadsheets...
+      </div>
+    </div>
+    <div>
+      <input type="range" min="1950" max="2100" value="2020" step="5" id="myRange">
+    </div>
+
+  </div>
+
+  <div id="japan" class="tabcontent">
+    <div class="title2">
+      Japan Aging Problem
+    </div>
+    <div id="syn"></div>
+  </div>
+
+  <div id="us" class="tabcontent">
+    <div class="title2">
+      United State Aging Problem
+    </div>
+    <img src="./Assets/old.png" width=1000 />
+  </div>
+
+
+  <div id="geo" class="tabcontent">
+    <div class="title">
+      United State Aging Problem with GeoMap
+    </div>
+    <div class="embed-container"><iframe width="400" height="300" frameborder="0" scrolling="no" marginheight="0"
+        marginwidth="0" title="aging"
+        src="//ucsdonline.maps.arcgis.com/apps/Embed/index.html?webmap=194837247dcd4be49aad99969150c552&extent=-144.7588,13.5687,-41.2236,57.3192&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=light"></iframe>
+    </div>
+    <img src="./Assets/legend.png" width=200 />
+  </div>
+
+
+
+
+  <script src="index.js"></script>
+</body>
+
+</html>
