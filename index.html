@@ -64,6 +64,13 @@
     padding-left: 20%;
   }
 
+  #lone {
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding-left: 30%;
+  }
+
   #geo {
     justify-content: center;
     align-items: center;
@@ -100,12 +107,51 @@
     padding-left: 10%;
   }
 
+  .canvas {
+    flex-direction: row;
+    display: flex;
+  }
+
   .title2 {
     font-weight: bold;
     font-size: xx-large;
     margin-bottom: 5%;
     margin-top: 5%;
     padding-left: 35%;
+  }
+
+  .title3 {
+    font-weight: bold;
+    font-size: xx-large;
+    margin-bottom: 3%;
+    margin-top: 3%;
+    padding-left: 10%;
+  }
+
+  .title4 {
+    font-weight: bold;
+    font-size: xx-large;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    padding-left: 40%;
+  }
+
+  .pic {
+    margin-left: 120px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .text2 {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+  }
+
+  .text3 {
+    margin-left: 180px;
   }
 
   #myRange {
@@ -154,8 +200,8 @@
     <button class="tablinks" onclick="openCity(event, 'japan')">3. Specific Case: Japan </button>
     <button class="tablinks" onclick="openCity(event, 'us')">4. Specific Case: United State</button>
     <button class="tablinks" onclick="openCity(event, 'geo')">5. GeoMap of aging: US</button>
-    <button class="tablinks" onclick="openCity(event, 'geo')">6. Related to Loneliness</button>
-    <button class="tablinks" onclick="openCity(event, 'geo')">7. Our Solution</button>
+    <button class="tablinks" onclick="openCity(event, 'lone')">6. Related to Loneliness</button>
+    <button class="tablinks" onclick="openCity(event, 'feature')">7. Our Solution</button>
   </div>
 
   <div id="video" class="tabcontent">
@@ -166,13 +212,11 @@
       <iframe width="616" height="346" src="https://www.youtube.com/embed/VBCJU9MHZ2E" frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
-    <div class="text">
-      This is the video
-    </div>
+    
   </div>
 
   <div id="map" class="tabcontent">
-    <div class="title">
+    <div class="title3">
       Choropleth Map to Median Age Per Year
     </div>
 
@@ -212,6 +256,50 @@
         src="//ucsdonline.maps.arcgis.com/apps/Embed/index.html?webmap=194837247dcd4be49aad99969150c552&extent=-144.7588,13.5687,-41.2236,57.3192&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=light"></iframe>
     </div>
     <img src="./Assets/legend.png" width=200 />
+  </div>
+
+  <div id="lone" class="tabcontent">
+      <div class="title">
+        Data For Loneliness
+      </div>
+      <img src="./Assets/lone.png" width=450/>
+  </div>
+
+  <div id="feature" class="tabcontent">
+    <div class="title4">
+      Our Solution
+    </div>
+    
+    <div class="canvas">
+      
+      <div class="pic">
+          <img src="./Assets/main.png" width=200 />
+          <div class="text2">
+              Main Page
+          </div>
+      </div>
+      
+      <div class="pic">
+          <img src="./Assets/record.png" width=200/>
+          <div class="text2">
+              Record Page
+          </div>
+          
+      </div>
+      <div class="pic">
+          <img src="./Assets/timeline.png" width=200/>
+          <div class="text2">
+              Event Timeline
+          </div>
+          
+      </div>
+      <div class="pic">
+          <img src="./Assets/tree2.png" width=200/>
+          <div class="text2">
+              Family Tree
+          </div>
+      </div>
+    </div>
   </div>
 
 
